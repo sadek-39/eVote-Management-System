@@ -20,10 +20,10 @@ class AwsMailController extends Controller
         $recipient = 'atomsadek@gmail.com';
 
         // Replace smtp_username with your Amazon SES SMTP user name.
-        $usernameSmtp = 'AKIAVA5HK763V5UYKBVN';
+        $usernameSmtp = '';
 
         // Replace smtp_password with your Amazon SES SMTP password.
-        $passwordSmtp = 'BLjOEK/019DfhIjDwF+12RmGXCBFq/a6EJDBYsCdd/CB';
+        $passwordSmtp = '';
 
         // Specify a configuration set. If you do not want to use a configuration
         // set, comment or remove the next line.
