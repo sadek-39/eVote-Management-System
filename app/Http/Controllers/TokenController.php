@@ -6,6 +6,7 @@ use App\Mail\TestMail;
 use App\Models\TokenGenerate;
 use App\Models\TokenStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -62,12 +63,12 @@ class TokenController extends Controller
         $url='http://'.env('DB_host').':8000/vote-panel/'.$generated_token;
         //$tokenfromurl=explode('=',$generated_token);        
         $details=[
-            'Tilte'=>'Vote Link',
+            'Title'=>'Vote Link',
             'body'=>'This is the vote link '.$url
         ];
         //$memberid=$id;
         if($generated_token){
-            Mail::to('emailtorubel@gmail.com')->send(new TestMail($details));
+            Mail::to('atomsadek@gmail.com')->send(new TestMail($details));
             $i=1;
             $j=0;
         }else{
@@ -86,6 +87,36 @@ class TokenController extends Controller
         return response()->json("success");
 
         
+    }
+    //createOTP
+    public function createOTP()
+    {
+        $top="1234567890";
+        $otp_array=array();
+        $length=strlen($top)-1;
+        for($i=0;$i<6;$i++){
+            $n=rand(0,$length);
+            $otp_array[$i]=$top[$n];
+
+        }
+        $otp=implode($otp_array);
+        return $otp;
+
+    }
+    public function sendOTP()
+    {
+        $otpfrom=$this->createOTP();
+        $email_details=[
+            'Title'=>'otp_verification_eVote',
+            'body'=>'Here is the OTP :'.$otpfrom
+        ];
+        if($otpfrom){
+            Mail::to("atomsadek@gmail.com")->send(new TestMail($email_details));
+            return view('vote.vote-submit');
+        }else{
+            return "OTP sending failed";
+        }
+
     }
 
     /**

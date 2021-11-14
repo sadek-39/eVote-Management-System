@@ -13,6 +13,7 @@
 </head>
 <body>
     <h1>Vote Panel</h1>
+    <a href="{{route('token.sendOTP')}}">Vote Now</a>
     
     
 </body>
